@@ -17,5 +17,8 @@ public class countDaysWithoutMeeting {
         }
         return count;
     }
-
+    
+    public static void main(String[] args) {
+        System.out.println(new ListNode() == new ListNode());
+    }
 }
