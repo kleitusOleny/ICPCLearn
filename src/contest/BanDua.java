@@ -1,11 +1,13 @@
 package contest;
 
 
+import java.util.Scanner;
+
 public class BanDua {
     public static int getEdgeOfSquare(int n,int[]arr){
         int res = 1;
         int left =0, right = 0;
-        int edge = 0;
+        int edge = 0, min =0;
         while (left < n && right < n){
             if (minOfAll(arr,left,right) > edge){
                 edge++;
@@ -30,7 +32,13 @@ public class BanDua {
     }
     
     public static void main(String[] args) {
-        int[]arr = new int[]{8,8,1,4,6,8,2};
-        System.out.println(getEdgeOfSquare(arr.length,arr));
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[]arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scan.nextInt();
+        }
+        System.out.println(getEdgeOfSquare(n,arr));
+        
     }
 }

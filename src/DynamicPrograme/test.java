@@ -1,38 +1,39 @@
 package DynamicPrograme;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class test {
-    public static void main(String[] args) {
-        String number = "19248759123798125132";
-        int n = number.length();
-        int[][] dp = new int[n][10]; // dp[i][d] lưu số lần xuất hiện của d từ 0 đến i
+    public static int test(int n, int[] a){
+        int dp[] = new int[n+1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
         
-        // Khởi tạo hàng đầu tiên
-        dp[0][number.charAt(0)-'0'] = 1;
-        
-        // Duyệt qua từng ký tự
+        dp[1] = 0;
         for (int i = 1; i < n; i++) {
-            int digit = number.charAt(i) - '0';
-            
-            // Kế thừa số lần xuất hiện từ dp[i-1]
-            for (int d = 0; d < 10; d++) {
-                dp[i][d] = dp[i - 1][d];
+            if (i+1 <= n) {
+                dp[i+1] = Math.min(dp[i+1],dp[i] + Math.abs(a[i] - a[i+1]));
             }
-            
-            // Cập nhật chữ số hiện tại
-            dp[i][digit]++;
+            if (i+2 <= n){
+                dp[i+2] = Math.min(dp[i+2],dp[i] + Math.abs(a[i] - a[i+2]));
+            }
         }
+        return dp[n];
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int[]res = new int[n+1];
         
-        for (int[] intA : dp) {
-            for (int j = 0; j < intA.length; j++) {
-                System.out.print(intA[j] + " ");
-            }
-            System.out.println();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i < n+1; i++) {
+            res[i] = Integer.parseInt(st.nextToken());
         }
-        // In kết quả
-        for (int d = 0; d < 10; d++) {
-            if (dp[n - 1][d] > 0) {
-                System.out.println("Chữ số " + d + " xuất hiện " + dp[n - 1][d] + " lần.");
-            }
-        }
+        System.out.println(test(n,res));
+        
     }
 }
