@@ -2,39 +2,35 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
 
 public class NearestSmallerValue {
-    public static void nearst(int n,int[]arr) {
-        Stack<Integer> stack = new Stack<>();
-        int[] arr2 = new int[n+1];
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int[]arr = new int[n+1];
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 1; i < n+1; i++) {
-            arr2[i] = arr[i-1];
+            arr[i] = Integer.parseInt(st.nextToken());
         }
+        StringBuilder res = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
         stack.push(0);
         for (int i = 1; i <= n; i++) {
             //remove
             while (!stack.isEmpty() ){
-                if (arr2[i] <= arr2[stack.peek()]) {
+                if (arr[i] <= arr[stack.peek()]) {
                     stack.pop();
                 }else {
-                    System.out.print(stack.peek()+ " ");
+                    res.append(stack.peek()).append(" ");
                     break;
                 }
             }
             stack.push(i);
         }
-    }
-    
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine().trim());
-        int[]arr = new int[n];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-        nearst(n,arr);
-        br.close();
+        System.out.println(res.toString().trim());
     }
 }
