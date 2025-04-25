@@ -1,45 +1,36 @@
 package contest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class SumOfThreeValues {
-    static class Pair {
-        int value, index;
-        
-        Pair(int value, int index) {
-            this.value = value;
-            this.index = index;
-        }
-    }
     
-    public static int[] sumOfThreeValues(int[] nums, int s, int n) {
-        Pair[] arr = new Pair[n];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());
+        
+        StringBuilder res = new StringBuilder();
+        st = new StringTokenizer(br.readLine());
+        Map<Integer,Integer> pos = new LinkedHashMap<>();
+        int[]arr = new int[n+1];
+        
+        for (int i = n-1; i <= 1; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
         
         for (int i = 0; i < n; i++) {
-            arr[i] = new Pair(nums[i], i + 1);
-        }
-        
-        Arrays.sort(arr, Comparator.comparingInt(a -> a.value));
-        
-        for (int i = 0; i < n - 2; i++) {
-            int left = i + 1, right = n - 1;
-            while (left < right) {
-                int sum = arr[i].value + arr[left].value + arr[right].value;
-                if (sum == s) {
-                    int[] res = new int[]{arr[i].index, arr[left].index, arr[right].index};
-                    Arrays.sort(res);
-                    return res;
-                } else if (sum < s) {
-                    left++;
-                } else {
-                    right--;
+            for (int j = i + 1; j < n; j++) {
+                int ans = arr[i] + arr[j];
+                if (x - ans > 0) {
+                
                 }
             }
         }
+        
         System.out.println("IMPOSSIBLE");
-        return new int[0];
     }
-    
-    
-    
 }
