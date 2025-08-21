@@ -63,6 +63,7 @@ public class DrunkenMaze {
                 maze[i][j] = line.charAt(j - 1);
             }
         }
+        
         d = new int[n + 5][m + 5][7][7];
         for (int i = 0; i < d.length; i++) {
             for (int j = 0; j < d[i].length; j++) {
